@@ -18,7 +18,7 @@ class FooAbility
 end
 
 describe Spree::Ability, :type => :model do
-  let(:user) { create(:user) }
+  let(:user) { build(:user) }
   let(:ability) { Spree::Ability.new(user) }
   let(:token) { nil }
 
@@ -64,9 +64,9 @@ describe Spree::Ability, :type => :model do
     let(:resource) { Object.new }
     let(:resource_shipment) { Spree::Shipment.new }
     let(:resource_product) { Spree::Product.new }
-    let(:resource_user) { Spree.user_class.new }
+    let(:resource_user) { create :user }
     let(:resource_order) { Spree::Order.new }
-    let(:fakedispatch_user) { Spree.user_class.new }
+    let(:fakedispatch_user) { Spree.user_class.create }
     let(:fakedispatch_ability) { Spree::Ability.new(fakedispatch_user) }
 
     context 'with admin user' do
@@ -222,7 +222,7 @@ describe Spree::Ability, :type => :model do
         it_should_behave_like 'no index allowed'
       end
       context 'requested by other user' do
-        let(:resource) { Spree.user_class.new }
+        let(:resource) { Spree.user_class.create }
         it_should_behave_like 'create only'
       end
     end
