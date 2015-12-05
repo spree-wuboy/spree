@@ -10,7 +10,7 @@
       <%= f.field_container :permalink_part, class: ['form-group'] do %>
         <%= f.label :permalink_part, Spree.t(:permalink) %> <span class="required">*</span>
         <%= text_field_tag :permalink_part, @permalink_part, :class => 'form-control' %>
-        <p class="help-block" id="permalink_part_display">
+        <span class="help-block" id="permalink_part_display">
           <%= @taxon.permalink.split('/')[0...-1].join('/') + '/' %>
         </span>
       <% end %>
@@ -39,7 +39,7 @@
     <%= f.text_field :meta_description, :class => 'form-control', :rows => 6 %>
   <% end %>
 
-  <%= f.field_container :meta_description, class: ['form-group'] do %>
+  <%= f.field_container :meta_keywords, class: ['form-group'] do %>
     <%= f.label :meta_keywords, Spree.t(:meta_keywords) %>
     <%= f.text_field :meta_keywords, :class => 'form-control', :rows => 6 %>
   <% end %>
