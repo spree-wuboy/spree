@@ -103,7 +103,7 @@ module Spree
 
 
     def self.default
-      Rails.cache.fetch("default_stock_location") do
+      Rails.cache.fetch("#{Rails.application.class.parent_name.underscore}_default_stock_location") do
         default_location = where(default: true).first
         if default_location.blank? && (default_location = first)
           default_location.update(default: true)
@@ -126,7 +126,7 @@ module Spree
       end
 
       def clear_cache
-        Rails.cache.delete("default_stock_location")
+        Rails.cache.delete("#{Rails.application.class.parent_name.underscore}_default_stock_location")
       end
   end
 end

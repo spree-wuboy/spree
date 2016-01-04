@@ -11,14 +11,14 @@ module Spree
     before_save :clear_cache
 
     def self.default
-      Rails.cache.fetch("default_shipping_category") do
+      Rails.cache.fetch("#{Rails.application.class.parent_name.underscore}_default_shipping_category") do
         first
       end
     end
 
     private
     def clear_cache
-      Rails.cache.delete("default_shipping_category")
+      Rails.cache.delete("#{Rails.application.class.parent_name.underscore}_default_shipping_category")
     end
   end
 end
