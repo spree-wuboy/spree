@@ -3,7 +3,7 @@ module Spree
     before_save :clear_cache
 
     def self.current
-      tracker = Rails.cache.fetch("current_tracker") do
+      tracker = Rails.cache.fetch("#{Rails.application.class.parent_name.underscore}_current_tracker") do
         where(active: true).first
       end
       tracker.analytics_id.present? ? tracker : nil if tracker
@@ -11,7 +11,7 @@ module Spree
 
 
     def clear_cache
-      Rails.cache.delete("current_tracker")
+      Rails.cache.delete("#{Rails.application.class.parent_name.underscore}_current_tracker")
     end
   end
 end
